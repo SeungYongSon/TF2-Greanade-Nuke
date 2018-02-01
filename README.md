@@ -1,6 +1,6 @@
 # 팀포2 슈류탄 핵
 
-TF2 Dedicated Sourcemod Server 에서만 사용가능한  게임플러그인 입니다.  
+TF2 Dedicated Sourcemod Server 에서만 사용가능한 게임플러그인 입니다.  
 마우스3 으로 바인드된 키를 누르면 야구공이 던져집니다.  
 그 야구공이 3초 정도 지나면 터집니다....  
 폭발이 휘말리면 존나게 아파여!  
