@@ -4,12 +4,19 @@
 #include <tf2>
 #include <tf2_stocks>
 
+public Plugin:myinfo = {
+	name = "Grenade Nuke",
+	author = "FOOLSIH",
+	description = "Throw the grenade!!!",
+	version = 1.0,
+	url = "https://github.com/SeungYongSon"
+};
 
-int LastUsed[MAXPLAYERS+1];
 #define IN_ATTACK3		(1 << 25)
-
 #define SOUND_LAUNCH	"misc/doomsday_missile_launch.wav"
 #define SOUND_EXPLODE	"misc/doomsday_missile_explosion.wav"
+
+int LastUsed[MAXPLAYERS+1];
 
 public void OnMapStart() 
 {
@@ -46,7 +53,6 @@ public Action OnPreThink(int iClient)
 			int iBall = CreateEntityByName("tf_projectile_stun_ball");
 			if(IsValidEntity(iBall))
 			{
-				//iClient = GetEntPropEnt(iBall, Prop_Data, "m_hOwner")
 				float vPosition[3];
 				float vAngles[3];
 				float flSpeed = 1500.0;
@@ -73,7 +79,6 @@ public Action OnPreThink(int iClient)
 				CreateParticle(iBall, "xms_icicle_melt", true, 3.0);
 				CreateParticle(iBall, "burningplayer_corpse", true, 3.0);
 				CreateParticle(iBall, "unusual_smoking", true, 3.0);
-				//CreateParticle(iBall, "utaunt_meteor_parent", true, 3.0);
 				SetEntityRenderColor(iBall, 190, 251, 250, 255);
 			}
 		}
@@ -95,24 +100,6 @@ public void BallBreak(const char[] output, int caller, int activator, float dela
 	EmitSoundToAll(SOUND_EXPLODE);
 	pos[2] += 436.0;
 	ShowParticle(pos, "cinefx_goldrush", 15.0);
-	/*
-	float Flash[3], Collumn[3];
-	Flash[0] = pos[0];
-	Flash[1] = pos[1];
-	Flash[2] = pos[2];
-	
-	Collumn[0] = pos[0];
-	Collumn[1] = pos[1];
-	Collumn[2] = pos[2];
-	
-	pos[2] += 6.0;
-	Flash[2] += 236.0;
-	Collumn[2] += 1652.0;
-
-
-	ShowParticle(pos, "base_destroyed_smoke_doomsday", 30.0);
-	ShowParticle(Flash, "flash_doomsday", 10.0);
-	ShowParticle(Collumn, "dooms_nuke_collumn", 30.0);*/
 
 	int shaker = CreateEntityByName("env_shake");
 	if(shaker != -1)
@@ -133,7 +120,6 @@ public void BallBreak(const char[] output, int caller, int activator, float dela
 	int iBomb = CreateEntityByName("tf_generic_bomb");
 	DispatchKeyValueVector(iBomb, "origin", pos);
 	DispatchKeyValueFloat(iBomb, "damage", 999999.0);
-	//DispatchKeyValueFloat(iBomb, "radius", 1200.0);
 	DispatchKeyValueFloat(iBomb, "radius", 500.0);
 	DispatchKeyValue(iBomb, "health", "1");
 	SetEntPropEnt(iBomb, Prop_Send, "m_hOwnerEntity", GetEntPropEnt(caller, Prop_Send, "m_hOwnerEntity"));
